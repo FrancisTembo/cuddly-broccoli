@@ -14,7 +14,7 @@ st.set_page_config(
 )
 
 GITHUB_USERNAME = "FrancisTembo"
-GITHUB_REPO = "unassuming-turtle"
+GITHUB_REPO = "cuddly-broccoli"
 GITHUB_BRANCH = "main"
 GITHUB_RAW_BASE_URL = f"https://raw.githubusercontent.com/{GITHUB_USERNAME}/{GITHUB_REPO}/{GITHUB_BRANCH}/weather_data"
 
@@ -62,6 +62,7 @@ def load_all_weather_data():
             if error:
                 errors.append(f"**{city}:** {error}")
             if not df.empty:
+                df['timestamp'] = df['timestamp'].dt.tz_convert('Africa/Johannesburg')
                 df['city'] = city
                 all_data.append(df)
 
@@ -92,7 +93,7 @@ def create_time_series_chart(df: pd.DataFrame, y_value: str, title: str, y_title
         y=y_value,
         color='city',
         title=title,
-        labels={'timestamp': 'Time (UTC)', y_value: y_title},
+        labels={'timestamp': 'Time (SAST)', y_value: y_title},
         markers=True,
         template="plotly_white"
     )
