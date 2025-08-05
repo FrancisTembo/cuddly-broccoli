@@ -146,4 +146,4 @@ The Streamlit dashboard provides several views of the weather data:
 *   **Humidity Analysis Tab**: Features a line chart for hourly humidity trends and corresponding summary statistics.
 *   **Raw Data Table**: An expandable section that shows the complete, filtered dataset in a table format.
 
-***NOTE: The data is retrieved from the weather API in UTC and displayed in SAST. This is to avoid data looking three hours behind as opposed to just one. ***
+***NOTE: The data is retrieved from the weather API in UTC and displayed in SAST. This is to avoid data looking three hours behind as opposed to just one.***
