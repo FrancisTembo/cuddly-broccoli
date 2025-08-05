@@ -24,7 +24,7 @@ CITY_FILES = {
     "Kampala": "kampala_weather.csv"
 }
 
-@st.cache_data(ttl=300)  # Cache data for 5 minutes (300 seconds)
+@st.cache_data(ttl=3600)  # Cache data for one hour
 def load_data_from_github(filename: str):
     """
     Downloads and parses a single CSV file from the GitHub repository.
@@ -48,7 +48,7 @@ def load_data_from_github(filename: str):
     except Exception as e:
         return pd.DataFrame(), f"An unexpected error occurred while parsing `{filename}`: {e}"
 
-@st.cache_data(ttl=300)
+@st.cache_data(ttl=3600)  # Cache data for one hour
 def load_all_weather_data():
     """
     Loads and combines weather data from all city CSV files on GitHub.
