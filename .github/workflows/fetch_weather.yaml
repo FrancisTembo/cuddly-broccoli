@@ -1,0 +1,37 @@
+name: Fetch Weather Data
+
+on:
+  # schedule:
+  #   - cron: '10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  fetch-weather:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.12'
+        
+    - name: Install dependencies
+      run: |
+        pip install requests pandas python-dotenv
+
+    - name: Fetch weather data
+      env:
+          OPEN_WEATHER_API_KEY: ${{ secrets.OPEN_WEATHER_API_KEY }}
+      run: |
+        python weather_fetcher.py
+        
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add weather_data/
+        git diff --staged --quiet || git commit -m "Update weather data $(date)"
+        git push

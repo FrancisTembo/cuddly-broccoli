@@ -164,9 +164,8 @@ def main():
         st.info("Waiting for data. The first data points should appear within an hour after deployment.")
         return
 
-    # --- Sidebar Filters ---
     st.sidebar.header("⚙️ Filters")
-    # Date Range Selector
+
     min_date = df['timestamp'].min().date()
     max_date = df['timestamp'].max().date()
 
@@ -178,7 +177,6 @@ def main():
         help="Filter the data to a specific time window."
     )
 
-    # Filter DataFrame based on date range
     try:
         start_date, end_date = date_range
         mask = (df['timestamp'].dt.date >= start_date) & (df['timestamp'].dt.date <= end_date)
@@ -187,8 +185,6 @@ def main():
         st.sidebar.error("Please select a valid date range (start and end date).")
         filtered_df = df # Use unfiltered data if range is invalid
 
-
-    # --- Main Content Tabs ---
     tab1, tab2, tab3 = st.tabs(["📊 Overview & Comparison", "🌡️ Temperature Analysis", "💧 Humidity Analysis"])
 
     with tab1:
@@ -228,7 +224,6 @@ def main():
         st.markdown("---")
         display_summary_statistics(filtered_df, 'humidity')
 
-    # --- Raw Data Expander ---
     with st.expander("📂 View Raw Data Table"):
         st.dataframe(
             filtered_df.sort_values('timestamp', ascending=False),
@@ -236,7 +231,6 @@ def main():
             hide_index=True
         )
 
-    # --- Footer ---
     st.markdown("---")
     st.markdown(
         "**Data Source**: OpenWeatherMap API | "
