@@ -10,7 +10,6 @@ from dotenv import load_dotenv
 DATA_DIR = "weather_data"
 BASE_GEOCODING_URL = "http://api.openweathermap.org/geo/1.0/direct"
 BASE_WEATHER_URL = "https://api.openweathermap.org/data/3.0/onecall/timemachine"
-LOG_DIR = "logs"
 
 CITIES = {
     "Cape Town": {"query": "Cape Town,ZA", "filename": "cape_town_weather.csv"},
